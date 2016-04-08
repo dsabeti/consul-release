@@ -18,12 +18,15 @@
 	network.ip
   end
 
-  {
+ config_hash = {
 	  node: {
 		  name: name,
 		  index: spec.index,
 		  external_ip: discover_external_ip,
 	  },
-	consul: p('consul'),
-}.to_json
+
+	consul: p('consul')
+}
+ config_hash[:consul]["agent"]["servers"]["lan"] = link('consul').instances.map(&:address)
+ config_hash.to_json
 %>

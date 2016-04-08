@@ -1,6 +1,13 @@
 ---
 name: consul_agent
 
+provides:
+  - name: consul
+    type: consul
+consumes:
+  - name: consul
+    type: consul
+
 templates:
   agent_ctl.sh.erb: bin/agent_ctl
   confab.json.erb: confab.json
